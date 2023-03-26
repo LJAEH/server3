@@ -1,0 +1,47 @@
+
+
+
+const div = document.getElementById("result2");
+
+
+$.ajax ({
+
+    url : "member/allMember",
+    type : "GET",
+    dataType : "JSON",
+    success: function(allMember){
+
+        if( allMember != null ){
+            const table = createElement("table");   
+            for(let i = 0; i < allMember.length; i++ ){
+                
+                const tr = createElement("tr");
+                const td1 = createElement("td");
+                td1.innerText = allMember[i].memberNo;
+                
+                const td2 = createElement("td");
+                td2.innerText = allMember[i].memberEmail;
+                
+                const td3 = createElement("td");
+                td3.innerText = allMember[i].memberNickname;
+                
+                tr.append(td1, td2, td3);
+
+            }
+            
+            table.append(tr);
+            
+            div.append(table);
+        } else {
+            const h4 = document.createElement("h4");
+
+            h4.innerText = "일치하는 회원이 없습니다";
+
+            h4.style.color = "red";
+
+            div.append(h4);
+
+        }
+    }
+
+})
